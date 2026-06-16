@@ -1,0 +1,21 @@
+{
+  "name": "dev-environment",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Reproducible developer environment wired to the ECC agent-harness toolkit (skills, multi-agent orchestration, and scheduled automation).",
+  "scripts": {
+    "setup": "bash scripts/setup-ecc.sh",
+    "ecc": "ecc",
+    "ecc:apply": "ecc typescript",
+    "multi": "ccg",
+    "security:scan": "agentshield scan ."
+  },
+  "devDependencies": {
+    "ecc-universal": "2.0.0",
+    "ecc-agentshield": "1.4.0",
+    "ccg-workflow": "3.1.5"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

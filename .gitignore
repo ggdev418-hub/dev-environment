@@ -1,0 +1,16 @@
+# dependencies
+node_modules/
+package-lock.json
+
+# logs
+*.log
+npm-debug.log*
+
+# os / editor
+.DS_Store
+*.swp
+
+# local-only agent state (keep committed config, ignore runtime state)
+.claude/sessions/
+.claude/shell-snapshots/
+.claude/backups/

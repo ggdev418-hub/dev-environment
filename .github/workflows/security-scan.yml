@@ -1,0 +1,26 @@
+name: security-scan
+
+# Nightly AgentShield security scan (the "cron/routine" step, GitHub-side).
+on:
+  schedule:
+    - cron: "0 3 * * *" # daily at 03:00 UTC
+  workflow_dispatch: {}
+  pull_request:
+    branches: ["**"]
+
+permissions:
+  contents: read
+
+jobs:
+  agentshield:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - name: Install pinned dependencies
+        run: npm install --no-audit --no-fund
+      - name: Run AgentShield scan
+        run: npx agentshield scan .

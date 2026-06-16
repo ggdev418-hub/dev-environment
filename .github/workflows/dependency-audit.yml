@@ -1,0 +1,26 @@
+name: dependency-audit
+
+# Nightly dependency hygiene: audit for known vulns + report outdated pins.
+on:
+  schedule:
+    - cron: "30 3 * * *" # daily at 03:30 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - name: Install pinned dependencies
+        run: npm install --no-audit --no-fund
+      - name: npm audit (high+ severity fails the job)
+        run: npm audit --audit-level=high
+      - name: Report outdated pins (non-blocking)
+        run: npm outdated || true
