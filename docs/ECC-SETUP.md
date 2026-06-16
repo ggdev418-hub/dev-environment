@@ -55,15 +55,17 @@ causes duplicate-hook errors.
 ## 2. Multi-agent orchestration
 
 The `/multi-*` commands (`/multi-plan`, `/multi-execute`, `/multi-backend`,
-`/multi-frontend`, `/multi-workflow`) are **not** part of the base install. They
-need the `ccg-workflow` runtime, which this repo pins:
+`/multi-frontend`, `/multi-workflow`) are ECC's wrappers and are **not** part of
+the base install — they sit on top of the `ccg-workflow` runtime (which this
+repo pins). `ccg-workflow` itself exposes `/ccg:*` commands, not `/multi-*`.
+
+Full setup, the real command list, the `~/.claude/.ccg/config.toml` schema, and
+the required Codex/Gemini CLIs are documented separately in
+**[MULTI-AGENT.md](MULTI-AGENT.md)**.
 
 ```bash
-npx ccg --help           # orchestration surface
-npx ccg init             # scaffold a multi-agent workflow in this project
+npx ccg --help           # ccg orchestration surface
 ```
-
-See the ECC v2.0 release notes for the PM2-backed agent fan-out model.
 
 ## 3. Scheduled automation (cron / routines)
 
